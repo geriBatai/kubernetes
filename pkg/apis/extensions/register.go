@@ -68,6 +68,10 @@ func addKnownTypes(scheme *runtime.Scheme) {
 		&api.ListOptions{},
 		&ConfigMap{},
 		&ConfigMapList{},
+		&UserPolicy{},
+		&UserPolicyList{},
+		&UserPolicyMap{},
+		&UserPolicyMapList{},
 		&api.ExportOptions{},
 	)
 }
@@ -92,3 +96,7 @@ func (obj *Ingress) GetObjectKind() unversioned.ObjectKind                     {
 func (obj *IngressList) GetObjectKind() unversioned.ObjectKind                 { return &obj.TypeMeta }
 func (obj *ConfigMap) GetObjectKind() unversioned.ObjectKind                   { return &obj.TypeMeta }
 func (obj *ConfigMapList) GetObjectKind() unversioned.ObjectKind               { return &obj.TypeMeta }
+func (obj *UserPolicy) GetObjectKind() unversioned.ObjectKind                  { return &obj.TypeMeta }
+func (obj *UserPolicyList) GetObjectKind() unversioned.ObjectKind              { return &obj.TypeMeta }
+func (obj *UserPolicyMap) GetObjectKind() unversioned.ObjectKind               { return &obj.TypeMeta }
+func (obj *UserPolicyMapList) GetObjectKind() unversioned.ObjectKind           { return &obj.TypeMeta }

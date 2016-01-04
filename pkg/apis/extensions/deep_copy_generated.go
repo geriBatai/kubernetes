@@ -1648,6 +1648,116 @@ func deepCopy_extensions_ThirdPartyResourceList(in ThirdPartyResourceList, out *
 	return nil
 }
 
+func deepCopy_extensions_UserPolicy(in UserPolicy, out *UserPolicy, c *conversion.Cloner) error {
+	if err := deepCopy_unversioned_TypeMeta(in.TypeMeta, &out.TypeMeta, c); err != nil {
+		return err
+	}
+	if err := deepCopy_api_ObjectMeta(in.ObjectMeta, &out.ObjectMeta, c); err != nil {
+		return err
+	}
+	if err := deepCopy_extensions_UserPolicySpec(in.Spec, &out.Spec, c); err != nil {
+		return err
+	}
+	return nil
+}
+
+func deepCopy_extensions_UserPolicyList(in UserPolicyList, out *UserPolicyList, c *conversion.Cloner) error {
+	if err := deepCopy_unversioned_TypeMeta(in.TypeMeta, &out.TypeMeta, c); err != nil {
+		return err
+	}
+	if err := deepCopy_unversioned_ListMeta(in.ListMeta, &out.ListMeta, c); err != nil {
+		return err
+	}
+	if in.Items != nil {
+		out.Items = make([]UserPolicy, len(in.Items))
+		for i := range in.Items {
+			if err := deepCopy_extensions_UserPolicy(in.Items[i], &out.Items[i], c); err != nil {
+				return err
+			}
+		}
+	} else {
+		out.Items = nil
+	}
+	return nil
+}
+
+func deepCopy_extensions_UserPolicyMap(in UserPolicyMap, out *UserPolicyMap, c *conversion.Cloner) error {
+	if err := deepCopy_unversioned_TypeMeta(in.TypeMeta, &out.TypeMeta, c); err != nil {
+		return err
+	}
+	if err := deepCopy_api_ObjectMeta(in.ObjectMeta, &out.ObjectMeta, c); err != nil {
+		return err
+	}
+	if err := deepCopy_extensions_UserPolicyMapSpec(in.Spec, &out.Spec, c); err != nil {
+		return err
+	}
+	return nil
+}
+
+func deepCopy_extensions_UserPolicyMapList(in UserPolicyMapList, out *UserPolicyMapList, c *conversion.Cloner) error {
+	if err := deepCopy_unversioned_TypeMeta(in.TypeMeta, &out.TypeMeta, c); err != nil {
+		return err
+	}
+	if err := deepCopy_unversioned_ListMeta(in.ListMeta, &out.ListMeta, c); err != nil {
+		return err
+	}
+	if in.Items != nil {
+		out.Items = make([]UserPolicy, len(in.Items))
+		for i := range in.Items {
+			if err := deepCopy_extensions_UserPolicy(in.Items[i], &out.Items[i], c); err != nil {
+				return err
+			}
+		}
+	} else {
+		out.Items = nil
+	}
+	return nil
+}
+
+func deepCopy_extensions_UserPolicyMapSpec(in UserPolicyMapSpec, out *UserPolicyMapSpec, c *conversion.Cloner) error {
+	if in.Rules != nil {
+		out.Rules = make([]UserPolicyRule, len(in.Rules))
+		for i := range in.Rules {
+			if err := deepCopy_extensions_UserPolicyRule(in.Rules[i], &out.Rules[i], c); err != nil {
+				return err
+			}
+		}
+	} else {
+		out.Rules = nil
+	}
+	if in.Policies != nil {
+		out.Policies = make([]string, len(in.Policies))
+		for i := range in.Policies {
+			out.Policies[i] = in.Policies[i]
+		}
+	} else {
+		out.Policies = nil
+	}
+	return nil
+}
+
+func deepCopy_extensions_UserPolicyRule(in UserPolicyRule, out *UserPolicyRule, c *conversion.Cloner) error {
+	out.Namespace = in.Namespace
+	out.Path = in.Path
+	out.ReadOnly = in.ReadOnly
+	out.Resource = in.Resource
+	return nil
+}
+
+func deepCopy_extensions_UserPolicySpec(in UserPolicySpec, out *UserPolicySpec, c *conversion.Cloner) error {
+	if in.Rules != nil {
+		out.Rules = make([]UserPolicyRule, len(in.Rules))
+		for i := range in.Rules {
+			if err := deepCopy_extensions_UserPolicyRule(in.Rules[i], &out.Rules[i], c); err != nil {
+				return err
+			}
+		}
+	} else {
+		out.Rules = nil
+	}
+	return nil
+}
+
 func deepCopy_intstr_IntOrString(in intstr.IntOrString, out *intstr.IntOrString, c *conversion.Cloner) error {
 	out.Type = in.Type
 	out.IntVal = in.IntVal
@@ -1751,6 +1861,13 @@ func init() {
 		deepCopy_extensions_ThirdPartyResourceData,
 		deepCopy_extensions_ThirdPartyResourceDataList,
 		deepCopy_extensions_ThirdPartyResourceList,
+		deepCopy_extensions_UserPolicy,
+		deepCopy_extensions_UserPolicyList,
+		deepCopy_extensions_UserPolicyMap,
+		deepCopy_extensions_UserPolicyMapList,
+		deepCopy_extensions_UserPolicyMapSpec,
+		deepCopy_extensions_UserPolicyRule,
+		deepCopy_extensions_UserPolicySpec,
 		deepCopy_intstr_IntOrString,
 	)
 	if err != nil {

@@ -1414,3 +1414,65 @@ func TestValidateConfigMapUpdate(t *testing.T) {
 		}
 	}
 }
+
+func TestValidateUserPolicy(t *testing.T) {
+	successCases := []extensions.UserPolicy{
+		{
+			ObjectMeta: api.ObjectMeta{
+				Name:      "policy",
+				Namespace: api.NamespaceDefault,
+			},
+			Spec: extensions.UserPolicySpec{
+				Rules: []extensions.UserPolicyRule {
+					{
+						Path: "/",
+					},
+				},
+			}, 
+		},
+	}
+
+	for _, successCase := range successCases {
+		if errs := ValidateUserPolicy(&successCase); len(errs) != 0 {
+			t.Errorf("expected success: %v", errs)
+		}
+	}
+
+	errorCases := map[string]extensions.UserPolicy {
+		"spec.userpolicy: invalid name": {
+			ObjectMeta: api.ObjectMeta{
+				Name:      "invalid_name",
+				Namespace: api.NamespaceDefault,
+			},
+			Spec: extensions.UserPolicySpec{
+				Rules: []extensions.UserPolicyRule{
+					{
+						Path: "/",
+					},
+				},
+			},
+		},
+		"spec.userpolicy: missing namespace": {
+			ObjectMeta: api.ObjectMeta{
+				Name:      "name",
+			},
+			Spec: extensions.UserPolicySpec{
+				Rules: []extensions.UserPolicyRule{
+					{
+						Path: "/",
+					},
+				},
+			},
+		},
+	}
+
+	for testName, errorCase := range errorCases {
+		if errs := ValidateUserPolicy(&errorCase); len(errs) == 0 {
+			t.Errorf("expected failure: %s", testName)
+		}
+	}
+}
+
+func TestValidateUserPolicyUpdate(t *testing.T) {
+
+}

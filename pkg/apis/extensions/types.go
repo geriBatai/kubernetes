@@ -732,3 +732,64 @@ type ConfigMapList struct {
 	// Items is the list of ConfigMaps.
 	Items []ConfigMap `json:"items,omitempty"`
 }
+
+// UserPolicy holds data and rules for user acls
+type UserPolicy struct {
+	unversioned.TypeMeta `json:",inline"`
+	// Standard object's metadata.
+	// More info: http://releases.k8s.io/HEAD/docs/devel/api-conventions.md#metadata
+	api.ObjectMeta `json:"metadata,omitempty"`
+
+	// Spec is the desired state of the UserPolicy.
+	// More info: http://releases.k8s.io/HEAD/docs/devel/api-conventions.md#spec-and-status
+	Spec UserPolicySpec `json:"spec"`
+}
+
+// UserPolicyList is a collection of UserPolicy.
+type UserPolicyList struct {
+	unversioned.TypeMeta `json:",inline"`
+	// Standard object's metadata.
+	// More info: http://releases.k8s.io/HEAD/docs/devel/api-conventions.md#metadata
+	unversioned.ListMeta `json:"metadata,omitempty"`
+
+	// Items is the list of UserPolicy.
+	Items []UserPolicy `json:"items"`
+}
+
+type UserPolicySpec struct {
+	Rules []UserPolicyRule `json:"rules,omitempty"`
+}
+
+type UserPolicyRule struct {
+	Namespace string `json:"namespace,omitempty"`
+	Path      string `json:"path,omitempty"`
+	ReadOnly  bool `json:"readonly,omitempty"`
+	Resource  string `json:"resource,omitempty"`
+}
+
+type UserPolicyMap struct {
+	unversioned.TypeMeta `json:",inline"`
+	// Standard object's metadata.
+	// More info: http://releases.k8s.io/HEAD/docs/devel/api-conventions.md#metadata
+	api.ObjectMeta `json:"metadata,omitempty"`
+
+	// Spec is the desired state of the UserPolicy.
+	// More info: http://releases.k8s.io/HEAD/docs/devel/api-conventions.md#spec-and-status
+	Spec UserPolicyMapSpec `json:"spec"`
+}
+
+// UserPolicyMapList is a collection of UserPolicyMap.
+type UserPolicyMapList struct {
+	unversioned.TypeMeta `json:",inline"`
+	// Standard object's metadata.
+	// More info: http://releases.k8s.io/HEAD/docs/devel/api-conventions.md#metadata
+	unversioned.ListMeta `json:"metadata,omitempty"`
+
+	// Items is the list of UserPolicy.
+	Items []UserPolicy `json:"items"`
+}
+
+type UserPolicyMapSpec struct {
+	Rules []UserPolicyRule `json:"rules,omitempty"`
+	Policies []string `json:"policies,omitempty"`
+}

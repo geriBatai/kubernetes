@@ -539,4 +539,42 @@ func (ThirdPartyResourceList) SwaggerDoc() map[string]string {
 	return map_ThirdPartyResourceList
 }
 
+var map_UserPolicy = map[string]string{
+	"metadata": "Standard object's metadata. More info: http://releases.k8s.io/HEAD/docs/devel/api-conventions.md#metadata",
+	"spec":     "Spec is the desired state of the UserPolicy. More info: http://releases.k8s.io/HEAD/docs/devel/api-conventions.md#spec-and-status",
+}
+
+func (UserPolicy) SwaggerDoc() map[string]string {
+	return map_UserPolicy
+}
+
+var map_UserPolicyList = map[string]string{
+	"":         "UserPolicyList is a collection of UserPolicy.",
+	"metadata": "Standard object's metadata. More info: http://releases.k8s.io/HEAD/docs/devel/api-conventions.md#metadata",
+	"items":    "Items is the list of UserPolicy.",
+}
+
+func (UserPolicyList) SwaggerDoc() map[string]string {
+	return map_UserPolicyList
+}
+
+var map_UserPolicyMap = map[string]string{
+	"metadata": "Standard object's metadata. More info: http://releases.k8s.io/HEAD/docs/devel/api-conventions.md#metadata",
+	"spec":     "Spec is the desired state of the UserPolicy. More info: http://releases.k8s.io/HEAD/docs/devel/api-conventions.md#spec-and-status",
+}
+
+func (UserPolicyMap) SwaggerDoc() map[string]string {
+	return map_UserPolicyMap
+}
+
+var map_UserPolicyMapList = map[string]string{
+	"":         "UserPolicyMapList is a collection of UserPolicyMap.",
+	"metadata": "Standard object's metadata. More info: http://releases.k8s.io/HEAD/docs/devel/api-conventions.md#metadata",
+	"items":    "Items is the list of UserPolicy.",
+}
+
+func (UserPolicyMapList) SwaggerDoc() map[string]string {
+	return map_UserPolicyMapList
+}
+
 // AUTO-GENERATED FUNCTIONS END HERE

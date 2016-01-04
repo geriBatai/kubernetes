@@ -627,3 +627,19 @@ func ValidateConfigMapUpdate(newCfg, oldCfg *extensions.ConfigMap) field.ErrorLi
 
 	return allErrs
 }
+
+// ValidateUserPolicy validates required fields on a UserPolicy
+func ValidateUserPolicy(obj *extensions.UserPolicy) field.ErrorList {
+	allErrs := field.ErrorList{}
+	allErrs = append(allErrs, apivalidation.ValidateObjectMeta(&obj.ObjectMeta, true, ValidateUserPolicyName, field.NewPath("metadata"))...)
+	return allErrs
+}
+
+// ValidateUserPolicyUpdate validates required fields on a UserPolicy
+func ValidateUserPolicyUpdate(newObj, oldObj *extensions.UserPolicy) field.ErrorList {
+	allErrs := field.ErrorList{}
+	return allErrs
+}
+func ValidateUserPolicyName(name string, prefix bool) (bool, string) {
+	return apivalidation.NameIsDNSSubdomain(name, prefix)
+}
